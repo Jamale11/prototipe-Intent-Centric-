@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>IntentBoard – Intents Jam</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0d0d0d;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .app {
+      background: #1a1a1a;
+      padding: 2rem;
+      border-radius: 1rem;
+      width: 400px;
+      box-shadow: 0 0 20px rgba(0,255,200,0.3);
+    }
+    h1 {
+      font-size: 1.5rem;
+      color: #00ffc8;
+      text-align: center;
+    }
+    textarea {
+      width: 100%;
+      height: 80px;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      border: none;
+      margin: 1rem 0;
+      resize: none;
+      background: #111;
+      color: #fff;
+    }
+    button {
+      width: 100%;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 0.5rem;
+      background: #00ffc8;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .result {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: #0f0f0f;
+      border-radius: 0.5rem;
+      border-left: 4px solid #00ffc8;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <h1>⚡ IntentBoard</h1>
+    <p>Write your wildest intent 👇</p>
+    <textarea id="intentInput" placeholder="e.g. Swap 1 ETH to BTC on cheapest chain"></textarea>
+    <button onclick="processIntent()">Submit Intent</button>
+    <div id="output" class="result" style="display:none;"></div>
+  </div>
+
+  <script>
+    function processIntent() {
+      const input = document.getElementById("intentInput").value.toLowerCase();
+      const output = document.getElementById("output");
+
+      let suggestion = "No solver found. Try another intent.";
+
+      if(input.includes("swap")) {
+        suggestion = "🔄 Use Cross-chain Swap Agent (DEX Aggregator)";
+      } else if(input.includes("send")) {
+        suggestion = "📤 Use Wallet Agent to send assets";
+      } else if(input.includes("stake")) {
+        suggestion = "📈 Use Staking Agent on chain with best APY";
+      }
+
+      output.innerHTML = `<b>Your Intent:</b> ${input}<br><br><b>Suggested Solver:</b> ${suggestion}`;
+      output.style.display = "block";
+    }
+  </script>
+</body>
+</html>
